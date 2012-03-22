@@ -20,6 +20,10 @@ declare PASSWORD
 PASSWORD=xOefbK44bpYfI4TK8A5Vy4Qqe5oQEnmv1NzfLhBHdiiU3iivRnh7eQxGdZ6SEWkHT
 
 function tiao {
+    aliasName=`cat /etc/hosts |grep $MACHINE |cut -f1`
+    if [ "$aliasName" != "" ];then
+       MACHINE=$aliasName
+    fi
     expect -c "
       set timeout 10
       spawn ssh "$USER@$IP"

@@ -28,7 +28,10 @@ function tiao {
       set timeout 10
       spawn ssh "$USER@$IP"
       expect {
-         *assword: {
+         (yes/no)? {
+         send yes\r
+         exp_continue
+         } *assword: {
          send $PASSWORD\r
          exp_continue
          } PASSCODE: {

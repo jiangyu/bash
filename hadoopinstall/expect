@@ -1,0 +1,6 @@
+#!/usr/bin/expect
+set timeout 60
+spawn /bin/bash /usr/local/jdk-6u27-linux-x64.bin
+expect "continue....."
+send "\r"
+interact

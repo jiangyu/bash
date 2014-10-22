@@ -4,6 +4,7 @@
 # usage:just type the static password and dynamic password and the machine name
 
 declare STATIC
+STATIC=jiang19841955
 declare DYNAMIC
 declare MACHINE
 
@@ -14,12 +15,14 @@ IP=202.106.182.212
 # your name please
 declare USER 
 USER=jiangyu2
-
+declare COMMAND="1"
+#USER=fengchao
 # please paste the password the mail told u
 declare PASSWORD  
 PASSWORD=xOefbK44bpYfI4TK8A5Vy4Qqe5oQEnmv1NzfLhBHdiiU3iivRnh7eQxGdZ6SEWkHT
-
+#PASSWORD=6im4+Rba0PBk+sZD/XzN35tSDiZ8954+qzgqR0k2rnG869oSPprBGUJksV3boctqo
 function tiao {
+    echo $COMMAND
     aliasName=`cat /etc/hosts |grep "$MACHINE$" |cut -f1`
     if [ "$aliasName" != "" ];then
        MACHINE=$aliasName
@@ -37,7 +40,10 @@ function tiao {
          } PASSCODE: {
          send $STATIC$DYNAMIC\r
          exp_continue
-         } exit* {
+         } Enter* {
+	 send $COMMAND\r
+	 exp_continue
+	 } exit* {
          send $MACHINE\r
          interact
          } eof {
@@ -49,8 +55,8 @@ function tiao {
 
 function get_pass {
    stty -echo
-   read -p "Enter the static password:" STATIC
-   printf "\n"
+   #read -p "Enter the static password:" STATIC
+   #printf "\n"
    read -p "Enter the dynamic password:" DYNAMIC
    stty echo   
    printf "\n"
